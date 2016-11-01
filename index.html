@@ -12,14 +12,21 @@
 		<span>当前纬度:</span><span id="weidu"></span>
 	</div>
     <script>
-		var jd = document.getElementById("jingdu");
-		var wd = document.getElementById("weidu");
+	var jd = document.getElementById("jingdu");
+	var wd = document.getElementById("weidu");
         navigator.geolocation.getCurrentPosition(
             function(position){
             var cords = position.coords;
                 //alert("当前经度："+cords.longitude +", 纬度："+cords.latitude);
-				jd.innerHTML = cords.longitude+":";
-				jd.innerHTML = cords.latitude;
+				jd.innerHTML = cords.longitude;
+				wd.innerHTML = cords.latitude;
+				var map = new BMap.Map("allmap");
+				var point = new BMap.Point(cords.longitude, cords.latitude);
+				var gc = new BMap.Geocoder();
+				gc.getLocation(point, function(rs){
+				   var addComp = rs.addressComponents;
+				   alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+				});
             },
             function(error){
                 var errorTypes={1:"位置服务被拒绝", 2:"获取不到位置信息", 3:"获取位置信息超时"};
