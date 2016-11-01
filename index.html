@@ -5,11 +5,17 @@
     <title>地理位置</title>
 </head>
 <body>
+	<div class="">
+		<span>当前经度:</span><span class="jingdu"></span>
+	</div>
+	<div class="">
+		<span>当前纬度:</span><span class="weidu"></span>
+	</div>
     <script>
         navigator.geolocation.getCurrentPosition(
             function(position){
             var cords = position.coords;
-                alert("当前经度："+cords.longtitude +", 纬度："+cords.latitude);
+                alert("当前经度："+cords.longitude +", 纬度："+cords.latitude);
             },
             function(error){
                 var errorTypes={1:"位置服务被拒绝", 2:"获取不到位置信息", 3:"获取位置信息超时"};
